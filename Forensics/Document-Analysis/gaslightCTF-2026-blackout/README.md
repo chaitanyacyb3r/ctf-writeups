@@ -1,52 +1,52 @@
 
 
-\# gaslightCTF: blackout (Forensics)
+# gaslightCTF: blackout (Forensics)
 
 
 
-\## Challenge Details
+## Challenge Details
 
-\* \*\*Category:\*\* Forensics
+* **Category:** Forensics
 
-\* \*\*Points:\*\* 281 (148 solves)
+* **Points:** 281 (148 solves)
 
-\* \*\*Author:\*\* riyc
+* **Author:** riyc
 
-\* \*\*Provided File:\*\* `recovered\_file`
-
-
-
-\## Description
-
-> \*i was doing my work, then my power went off! my computer spat this out afterwards, can you recover the flag?\*
+* **Provided File:** `recovered_file`
 
 
 
-\---
+## Description
+
+> *i was doing my work, then my power went off! my computer spat this out afterwards, can you recover the flag?*
 
 
 
-\## 1. Initial Triage
-
-The provided challenge attachment is an extensionless file named `recovered\_file`\[cite: 1].
+---
 
 
 
-Inspecting the file header reveals standard PDF magic bytes\[cite: 1]:
+## 1. Initial Triage
+
+The provided challenge attachment is an extensionless file named `recovered_file`[cite: 1].
+
+
+
+Inspecting the file header reveals standard PDF magic bytes[cite: 1]:
 
 ```bash
 
-$ file recovered\_file
+$ file recovered_file
 
-recovered\_file: PDF document, version 1.4
+recovered_file: PDF document, version 1.4
 
 
 
-$ head -n 2 recovered\_file
+$ head -n 2 recovered_file
 
 %PDF-1.4
 
-1 0 obj <</Title (recovered\_file) /Producer (Skia/PDF m153 Google Docs Renderer)>>
+1 0 obj <</Title (recovered_file) /Producer (Skia/PDF m153 Google Docs Renderer)>>
 
 
 
@@ -54,13 +54,13 @@ $ head -n 2 recovered\_file
 
 
 
-\* \*\*Magic Bytes:\*\* `%PDF-1.4` confirms this is a standard PDF document.
+* **Magic Bytes:** `%PDF-1.4` confirms this is a standard PDF document.
 
 
 
 
 
-\* \*\*Producer:\*\* `Skia/PDF m153 Google Docs Renderer` indicates the file was exported from Google Docs.
+* **Producer:** `Skia/PDF m153 Google Docs Renderer` indicates the file was exported from Google Docs.
 
 
 
@@ -68,35 +68,35 @@ $ head -n 2 recovered\_file
 
 
 
-\---
+---
 
 
 
-\## 2. Vulnerability \& Mechanism Analysis
+## 2. Vulnerability \& Mechanism Analysis
 
 
 
-When opened in a standard graphical PDF reader, the contents appear heavily obscured or blacked out, aligning with the challenge title \*\*"blackout"\*\*.
+When opened in a standard graphical PDF reader, the contents appear heavily obscured or blacked out, aligning with the challenge title **"blackout"**.
 
 
 
-\### How PDFs Render Content:
+### How PDFs Render Content:
 
 
 
-\* A PDF is structured as an object graph containing ordered streams of drawing operations.
+* A PDF is structured as an object graph containing ordered streams of drawing operations.
 
 
 
 
 
-\* Text operations (`BT`, `Tj`, `ET`) place character glyphs onto the canvas.
+* Text operations (`BT`, `Tj`, `ET`) place character glyphs onto the canvas.
 
-\* Path-drawing operations fill geometric coordinates with color values (e.g., solid black `#000000`).
+* Path-drawing operations fill geometric coordinates with color values (e.g., solid black `#000000`).
 
-\* When visual "redactions" are made improperly in word processors (like drawing black shapes or highlights over sensitive text), the renderer draws the text first and layers the opaque shape directly over it.
+* When visual "redactions" are made improperly in word processors (like drawing black shapes or highlights over sensitive text), the renderer draws the text first and layers the opaque shape directly over it.
 
-\* The underlying character stream in the `/Contents` objects remains unscrubbed and fully intact.
+* The underlying character stream in the `/Contents` objects remains unscrubbed and fully intact.
 
 
 
@@ -108,11 +108,11 @@ Because programmatic extraction utilities (e.g., `pypdf`, `pdftotext`) parse raw
 
 
 
-\---
+---
 
 
 
-\## 3. Reproduction \& Extraction
+## 3. Reproduction \& Extraction
 
 
 
@@ -130,31 +130,31 @@ import re
 
 def solve():
 
-&#x20;   reader = pypdf.PdfReader("recovered\_file")
+&#x20;   reader = pypdf.PdfReader("recovered_file")
 
-&#x20;   flag\_pattern = re.compile(r"\[A-Za-z0-9\_]+CTF\\{.\*\\}")
+&#x20;   flag_pattern = re.compile(r"[A-Za-z0-9_]+CTF\\{.*\\}")
 
 
 
-&#x20;   for page\_index, page in enumerate(reader.pages, start=1):
+&#x20;   for page_index, page in enumerate(reader.pages, start=1):
 
-&#x20;       extracted\_text = page.extract\_text()
+&#x20;       extracted_text = page.extract_text()
 
-&#x20;       matches = flag\_pattern.findall(extracted\_text)
+&#x20;       matches = flag_pattern.findall(extracted_text)
 
 &#x20;       if matches:
 
-&#x20;           print(f"\[+] Flag discovered on Page {page\_index}: {matches\[0]}")
+&#x20;           print(f"[+] Flag discovered on Page {page_index}: {matches[0]}")
 
 &#x20;           return
 
 
 
-&#x20;   print("\[-] No flag pattern matched.")
+&#x20;   print("[-] No flag pattern matched.")
 
 
 
-if \_\_name\_\_ == "\_\_main\_\_":
+if __name__ == "__main__":
 
 &#x20;   solve()
 
@@ -164,13 +164,13 @@ if \_\_name\_\_ == "\_\_main\_\_":
 
 
 
-\### Execution Output:
+### Execution Output:
 
 
 
 ```text
 
-\[+] Flag discovered on Page 6: gaslightCTF{c0w4bung4\_f1le\_4ev3r}
+[+] Flag discovered on Page 6: gaslightCTF{c0w4bung4_f1le_4ev3r}
 
 
 
@@ -186,7 +186,7 @@ The document spans 8 pages populated with repetitive filler text (`"cowabunga bu
 
 cowabunga 
 
-gaslightCTF{c0w4bung4\_f1le\_4ev3r} 
+gaslightCTF{c0w4bung4_f1le_4ev3r} 
 
 tongue
 
@@ -196,31 +196,27 @@ tongue
 
 
 
-\---
+---
 
 
 
-\## 4. Key Takeaways
+## 4. Key Takeaways
 
 
 
-\* \*\*Visual Layering ≠ Sanitization:\*\* Graphical overlays and cosmetic highlights do not sanitize underlying PDF character object streams.
-
-
-
-
-
-\* \*\*Stream-Level Triage:\*\* Always examine unrendered object streams using tools like `pypdf`, `pdftotext`, or `qpdf` when analyzing potentially redacted documents.
+* **Visual Layering ≠ Sanitization:** Graphical overlays and cosmetic highlights do not sanitize underlying PDF character object streams.
 
 
 
 
 
+* **Stream-Level Triage:** Always examine unrendered object streams using tools like `pypdf`, `pdftotext`, or `qpdf` when analyzing potentially redacted documents.
 
 
-```
 
 
 
-```
+
+
+
 
