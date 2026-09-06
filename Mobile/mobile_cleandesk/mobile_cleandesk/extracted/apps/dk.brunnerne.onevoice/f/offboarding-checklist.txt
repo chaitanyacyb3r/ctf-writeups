@@ -1,0 +1,10 @@
+Brunnerne A/S - handset offboarding (IT Services)
+=================================================
+  1. Confirm the colleague's last working day with HR.
+  2. Image the handset. Retain the image for 90 days.
+  3. Wipe the handset and return it to the Copenhagen pool.
+  4. Revoke OnePass enrolment.
+  5. Clean desk check: badge, laptop, handset, any printed cards.
+
+Images are retained on the IT share. Access is restricted to IT
+Services. (Ticket CAKE-914 requests that this be verified. Open.)

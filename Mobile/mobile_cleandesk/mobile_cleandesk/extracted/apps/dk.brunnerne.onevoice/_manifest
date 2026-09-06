@@ -1,0 +1,7 @@
+{
+  "package": "dk.brunnerne.onevoice",
+  "versionCode": 41,
+  "versionName": "3.2-approved",
+  "allowBackup": true,
+  "backupAgent": "dk.brunnerne.onevoice.StatementBackupAgent"
+}

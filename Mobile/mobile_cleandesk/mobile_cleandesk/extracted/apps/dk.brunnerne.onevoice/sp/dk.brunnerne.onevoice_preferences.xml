@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<map>
+    <boolean name="notifications_enabled" value="true" />
+    <boolean name="analytics_opt_in" value="false" />
+    <string name="last_statement_id">2026-W27-approved</string>
+    <long name="last_sync_ms" value="1783100400000" />
+    <string name="directory_base">https://onepass.brunnerne.dk</string>
+</map>

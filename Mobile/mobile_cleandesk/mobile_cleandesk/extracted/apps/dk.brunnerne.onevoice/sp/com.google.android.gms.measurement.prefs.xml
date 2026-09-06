@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<map>
+    <boolean name="measurement_enabled" value="false" />
+    <long name="first_open_time" value="1764946800000" />
+</map>

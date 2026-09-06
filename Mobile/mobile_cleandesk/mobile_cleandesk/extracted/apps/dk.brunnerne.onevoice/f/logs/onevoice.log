@@ -1,0 +1,10 @@
+07-03 17:00:00 I StatementStore: opening sealed archive (version 3)
+07-03 17:00:00 I StatementStore: content key loaded from shared preferences
+07-03 17:00:00 D OneVoice       : approved statement 2026-W27 rendered
+07-03 18:00:00 I OnePassEnrol   : enrolment complete for hanne.bak@brunnerne.dk
+07-03 18:00:00 W BackupAgent    : full backup requested by the platform
+07-03 18:00:00 I BackupAgent    : including domain sp (4 files)
+07-03 18:00:00 I BackupAgent    : including domain db (2 files)
+07-03 18:00:00 I BackupAgent    : including domain f (1 file)
+07-03 18:00:00 I BackupAgent    : excluding domain c (cache is not backed up)
+07-03 19:40:00 I BackupAgent    : backup finished, 0 errors
